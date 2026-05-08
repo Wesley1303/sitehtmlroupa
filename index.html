@@ -5,17 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> La' Montvidell - Roupas com Estilo</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
             background-color: #f8f9fa;
+            color: #333;
         }
 
         header {
@@ -35,11 +29,7 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #e91e63;
-        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: #e91e63; }
 
         .nav-links {
             display: flex;
@@ -51,52 +41,39 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
-            color: #e91e63;
+        .nav-links a:hover { color: #e91e63; }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e91e63;
+            color: white;
+            font-size: 0.8rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero {
             height: 70vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://source.unsplash.com/random/1600x900/?fashion') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://source.unsplash.com/random/1600x900/?fashion') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #e91e63;
-            color: white;
-            padding: 14px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background: #c2185b;
-            transform: scale(1.05);
         }
 
         .container {
@@ -105,12 +82,7 @@
             padding: 4rem 1rem;
         }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 2.5rem;
-            color: #222;
-        }
+        h2 { text-align: center; margin-bottom: 3rem; font-size: 2.5rem; }
 
         .products {
             display: grid;
@@ -126,9 +98,7 @@
             transition: transform 0.3s;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-        }
+        .product-card:hover { transform: translateY(-10px); }
 
         .product-card img {
             width: 100%;
@@ -138,59 +108,78 @@
 
         .product-info {
             padding: 1.2rem;
-        }
-
-        .product-info h3 {
-            margin-bottom: 0.5rem;
+            text-align: center;
         }
 
         .price {
             font-size: 1.4rem;
             font-weight: bold;
             color: #e91e63;
-            margin: 0.8rem 0;
-        }
-
-        /* Seção Promoções */
-        .promocoes {
-            background: #fff0f5;
-        }
-
-        /* Seção Contato */
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
             margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
         }
 
-        footer {
-            background: #222;
+        .btn {
+            background: #e91e63;
             color: white;
-            text-align: center;
-            padding: 3rem 1rem;
-            margin-top: 4rem;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.95rem;
-            }
-            .hero h1 {
-                font-size: 2.8rem;
-            }
+        .btn:hover { background: #c2185b; transform: scale(1.05); }
+
+        /* Carrinho */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: flex-end;
+        }
+
+        .cart-content {
+            background: white;
+            width: 420px;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .total {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* Pagamento */
+        .payment-section {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 40px auto;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -205,14 +194,17 @@
                 <li><a href="#promocoes">Promoções</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </div>
         </nav>
     </header>
 
     <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h1>Estilo que te representa</h1>
-            <p>Confira as últimas tendências da moda com qualidade e preço justo</p>
-            <a href="#produtos" class="btn">Ver Coleção</a>
+        <div style="text-align:center; max-width:700px;">
+            <h1 style="font-size:3.5rem;">Estilo que te representa</h1>
+            <p style="font-size:1.3rem;">Confira as últimas tendências da moda</p>
+            <a href="#produtos" class="btn"> Ver Coleção</a>
         </div>
     </section>
 
@@ -224,16 +216,16 @@
                 <div class="product-info">
                     <h3>Vestido Floral Midi</h3>
                     <p class="price">R$ 129,90</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">Comprar</a>
+                    <button class="btn" onclick="addToCart(1, 'Vestido Floral Midi', 129.90)">Adicionar ao Carrinho</button>
                 </div>
             </div>
 
             <div class="product-card">
-                <img src="https://source.unsplash.com/random/400x400/?jeans" alt="Calça Jeans">
+                <img src="https://source.unsplash.com/random/400x400/?jeans" alt="Calça">
                 <div class="product-info">
                     <h3>Calça Jeans Mom</h3>
                     <p class="price">R$ 89,90</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">Comprar</a>
+                    <button class="btn" onclick="addToCart(2, 'Calça Jeans Mom', 89.90)">Adicionar ao Carrinho</button>
                 </div>
             </div>
 
@@ -242,71 +234,126 @@
                 <div class="product-info">
                     <h3>Camiseta Básica Premium</h3>
                     <p class="price">R$ 49,90</p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">Comprar</a>
+                    <button class="btn" onclick="addToCart(3, 'Camiseta Básica Premium', 49.90)">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Seção Promoções -->
-    <div class="container promocoes" id="promocoes">
-        <h2>🔥 Promoções Especiais</h2>
-        <div class="products">
-            <div class="product-card">
-                <img src="https://source.unsplash.com/random/400x400/?blouse" alt="Blusa">
-                <div class="product-info">
-                    <h3>Blusa de Seda</h3>
-                    <p class="price"><s>R$ 99,90</s> <strong>R$ 59,90</strong></p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">Comprar</a>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="https://source.unsplash.com/random/400x400/?jacket" alt="Jaqueta">
-                <div class="product-info">
-                    <h3>Jaqueta Jeans</h3>
-                    <p class="price"><s>R$ 189,90</s> <strong>R$ 119,90</strong></p>
-                    <a href="#" class="btn" style="padding: 10px 20px; font-size: 0.95rem;">Comprar</a>
-                </div>
-            </div>
+    <!-- Carrinho Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-content">
+            <h2>Carrinho de Compras</h2>
+            <button onclick="toggleCart()" style="float:right; background:none; border:none; font-size:1.5rem;">✕</button>
+            
+            <div id="cart-items"></div>
+            
+            <div class="total">Total: R$ <span id="cart-total">0.00</span></div>
+            
+            <button class="btn" style="width:100%; padding:15px;" onclick="finalizePurchase()">
+                Finalizar Compra
+            </button>
         </div>
     </div>
 
-    <!-- Seção Contato -->
-    <div class="container" id="contato">
-        <h2>Entre em Contato</h2>
-        <div class="contact-form">
-            <form>
-                <input type="text" placeholder="Seu nome" required>
-                <input type="email" placeholder="Seu e-mail" required>
-                <input type="tel" placeholder="Seu WhatsApp">
-                <textarea rows="5" placeholder="Sua mensagem..." required></textarea>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Enviar Mensagem</button>
-            </form>
-        </div>
+    <!-- Seção de Pagamento -->
+    <div class="container payment-section" id="payment-section">
+        <h2>Finalizar Pagamento</h2>
+        <p><strong>Total a pagar: R$ <span id="final-total">0.00</span></strong></p>
+        
+        <h3>Escolha a forma de pagamento:</h3>
+        <button class="btn" style="width:100%; margin:10px 0; background:#4caf50;">Pagar com Pix</button>
+        <button class="btn" style="width:100%; margin:10px 0; background:#2196f3;">Cartão de Crédito</button>
+        <button class="btn" style="width:100%; margin:10px 0; background:#ff9800;">Boleto</button>
+        
+        <button onclick="completeOrder()" style="margin-top:20px; width:100%; padding:15px; background:#e91e63;">
+            Confirmar Pedido
+        </button>
+        <button onclick="backToCart()" style="margin-top:10px; width:100%; padding:12px; background:#666;">
+            Voltar ao Carrinho
+        </button>
     </div>
 
-    <footer>
+    <footer style="background:#222; color:white; text-align:center; padding:3rem;">
         <p>&copy; 2026 La' Montvidell - Todos os direitos reservados</p>
-        <p>Feito com ❤️ para quem ama moda</p>
     </footer>
 
     <script>
-        // Scroll suave ao clicar nos links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-    </script>
+        let cart = [];
 
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            updateCartCount();
+            alert(`${name} adicionado ao carrinho!`);
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            const itemsDiv = document.getElementById('cart-items');
+            let html = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                html = '<p style="text-align:center; padding:30px;">Seu carrinho está vazio.</p>';
+            } else {
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    html += `
+                        <div class="cart-item">
+                            <div style="margin-right:15px;">
+                                <strong>${item.name}</strong><br>
+                                R$ ${item.price.toFixed(2)} × ${item.quantity}
+                            </div>
+                            <div style="margin-left:auto; text-align:right;">
+                                <strong>R$ ${itemTotal.toFixed(2)}</strong><br>
+                                <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none;">Remover</button>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            itemsDiv.innerHTML = html;
+            document.getElementById('cart-total').textContent = total.toFixed(2);
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            toggleCart(); // atualiza
+        }
+
+        function finalizePurchase() {
+            if (cart.length === 0) return;
+            document.getElementById('cart-modal').style.display = 'none';
+            document.getElementById('payment-section').style.display = 'block';
+            
+            let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('final-total').textContent = total.toFixed(2);
+        }
+
+        function backToCart() {
+            document.getElementById('payment-section').style.display = 'none';
+            toggleCart();
+        }
+
+        function completeOrder() {
+            alert("🎉 Pedido realizado com sucesso!\n\nObrigado por comprar na La' Montvidell!");
+            cart = [];
+            updateCartCount();
+            document.getElementById('payment-section').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
